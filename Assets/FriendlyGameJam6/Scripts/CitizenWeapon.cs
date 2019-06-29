@@ -2,19 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WeaponType
+public enum CitizenWeaponType
 {
     Single = 0,
     Grenade = 1,
 };
 
-public class Weapon : MonoBehaviour
+public class CitizenWeapon : MonoBehaviour
 {
     public int Damage;
+
+    public int Cost;
 
     public float FireRate;
 
     public float Range;
 
-    public WeaponType Type;
+    public CitizenWeaponType Type;
 }

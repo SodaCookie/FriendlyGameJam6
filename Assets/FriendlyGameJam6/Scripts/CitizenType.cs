@@ -18,17 +18,17 @@ public class CitizenType : ScriptableObject
     [Tooltip("Percentage")]
     public float FireRateModifier;
 
-    public virtual int GetDamage(Weapon weapon)
+    public virtual int GetDamage(CitizenWeapon weapon)
     {
         return weapon.Damage + DamageModifier;
     }
 
-    public virtual float GetRange(Weapon weapon)
+    public virtual float GetRange(CitizenWeapon weapon)
     {
         return weapon.Range + RangeModifier;
     }
 
-    public virtual float GetFireRate(Weapon weapon)
+    public virtual float GetFireRate(CitizenWeapon weapon)
     {
         return 1 / (weapon.FireRate * FireRateModifier);
     }

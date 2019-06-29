@@ -7,7 +7,7 @@ public class Citizen : MonoBehaviour
 {
     public CitizenType CitizenRole;
 
-    public Weapon EquipedWeapon;
+    public CitizenWeapon EquipedWeapon;
 
     private float cooldown = 0;
     private bool isMoving = false;
