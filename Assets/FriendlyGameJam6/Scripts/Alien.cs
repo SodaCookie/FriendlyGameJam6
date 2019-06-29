@@ -14,8 +14,17 @@ public class Alien : MonoBehaviour
     public int Armor;
 
     public float MoveSpeed;
+       
+    void Start () {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        agent.destination = LevelManager.Instance.Target.position;
+    }
 
-    public float Target;
+    void Update() {
+        NavMeshAgent agent = GetComponent<NavMeshAgent>();
+        Animator animator = GetComponent<Animator>();
+        animator.SetBool("Walk", agent.velocity.magnitude > 0.01);
+    }
 
     private void OnDestroy()
     {
