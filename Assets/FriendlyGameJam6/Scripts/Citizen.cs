@@ -32,38 +32,39 @@ public class Citizen : MonoBehaviour
             cooldown -= Time.deltaTime;
             return;
         }
-        if (EnemyInRange() == null)
+        Alien enemy = EnemyInRange();
+        if (enemy == null)
         {
             return;
         }
-        FireWeapon();
+        FireWeapon(enemy);
     }
 
-    private void FireWeapon()
+    private void FireWeapon(Alien enemy)
     {
-        throw new NotImplementedException();
+        enemy.Health -= CitizenRole.GetDamage(EquipedWeapon);
+        cooldown = CitizenRole.GetFireRate(EquipedWeapon);
     }
 
     private bool CanFireWeapon()
     {
         if (cooldown <= 0)
         {
-            cooldown = CitizenRole.GetFireRate(EquipedWeapon);
             return true;
         }
         return false;
     }
 
-    private Transform EnemyInRange()
+    private Alien EnemyInRange()
     {
         for (int i = 0; i < LevelManager.Instance.Aliens.Count; i++)
         {
             Transform enemyTransform = LevelManager.Instance.Aliens[i].transform;
-            if (Mathf.Pow(enemyTransform.position.x - transform.position.x, 2) 
-                + Mathf.Pow(enemyTransform.position.z - transform.position.z, 2) 
+            if (Mathf.Pow(enemyTransform.position.x - transform.position.x, 2)
+                + Mathf.Pow(enemyTransform.position.z - transform.position.z, 2)
                     < Mathf.Pow(CitizenRole.GetRange(EquipedWeapon), 2))
             {
-                return enemyTransform;
+                return LevelManager.Instance.Aliens[i];
             }
         }
         return null;

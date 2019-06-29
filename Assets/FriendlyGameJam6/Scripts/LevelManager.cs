@@ -27,6 +27,9 @@ public class LevelManager : MonoBehaviour
     [SerializeField]
     public PlayerStatus Player = new PlayerStatus();
 
+    [HideInInspector]
+    public PlayerInput PlayerInput;
+
     public List<CitizenType> Citizens = new List<CitizenType>();
 
     [HideInInspector]
@@ -51,6 +54,7 @@ public class LevelManager : MonoBehaviour
         if (s_instance == null)
         {
             s_instance = this;
+            PlayerInput = GetComponent<PlayerInput>();
         }
         else
         {
@@ -59,15 +63,19 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    //private void Update()
-    //{
-    //    UpdateEnemySpawns();
-    //}
+    private void Update()
+    {
+        UpdateEnemySpawns();
+        if (Player.Lives <= 0)
+        {
+            print("You Lose");
+            Application.Quit();
+        }
+    }
 
-    //private void UpdateEnemySpawns()
-    //{
-    //    throw new NotImplementedException();
-    //}
+    private void UpdateEnemySpawns()
+    {
+    }
 
     // Ensure that the instance is destroyed when the game is stopped in 
     // the editor.

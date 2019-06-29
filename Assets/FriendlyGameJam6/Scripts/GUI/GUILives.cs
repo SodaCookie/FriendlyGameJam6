@@ -15,6 +15,6 @@ public class GUILives : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Text.text = LevelManager.Instance.Player.Lives.ToString();
+        Text.text = Mathf.Clamp(LevelManager.Instance.Player.Lives, 0, int.MaxValue).ToString();
     }
 }

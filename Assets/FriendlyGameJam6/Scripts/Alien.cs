@@ -24,6 +24,11 @@ public class Alien : MonoBehaviour
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         Animator animator = GetComponent<Animator>();
         animator.SetBool("Walk", agent.velocity.magnitude > 0.01);
+
+        if (Health <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnDestroy()
