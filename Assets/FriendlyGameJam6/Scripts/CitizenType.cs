@@ -13,11 +13,11 @@ public class CitizenType : ScriptableObject
 
     public int DamageModifier;
 
-    public int RangeModifier;
+    public float RangeModifier;
 
     public int DefaultDamage = 1;
 
-    public int DefaultRange = 1;
+    public float DefaultRange = 1;
 
     [Tooltip("Percentage")]
     public float DefaultFirerate = 1;

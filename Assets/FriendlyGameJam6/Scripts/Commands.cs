@@ -7,7 +7,9 @@ public class Commands : MonoBehaviour
 {
     public void CreateCitizen(GameObject citizenPrefab)
     {
-        LevelManager.Instance.Player.Citizens.Add(Instantiate(citizenPrefab, LevelManager.Instance.CitizenSpawnPoint));
+        LevelManager.Instance.Player.Citizens.Add(Instantiate(citizenPrefab, LevelManager.Instance.CitizenSpawnPoint.position, Quaternion.identity));
+        Citizen info = citizenPrefab.GetComponent<Citizen>();
+        LevelManager.Instance.Player.Money -= info.CitizenRole.Cost;
     }
 
     public void SellCitizen(GameObject citizen)
@@ -69,7 +71,7 @@ public class Commands : MonoBehaviour
     {
         for (int i = 0; i < group.Amount; i++)
         {
-            LevelManager.Instance.Aliens.Add(Instantiate(group.AlienType, LevelManager.Instance.AlienSpawnPoint));
+            LevelManager.Instance.Aliens.Add(Instantiate(group.AlienType));
             yield return new WaitForSeconds(minorDelay);
         }
     }

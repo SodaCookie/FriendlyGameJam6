@@ -37,7 +37,7 @@ public class Citizen : MonoBehaviour
 
     private void UpdateRangeIndicator()
     {
-        RangeIndicator.transform.localScale = new Vector3(1, 1, 1) * CitizenRole.GetRange(EquipedWeapon) * 2;
+        RangeIndicator.transform.localScale = new Vector3(1, 1, 1) * CitizenRole.GetRange(EquipedWeapon);
     }
 
     private void Update()
@@ -60,16 +60,26 @@ public class Citizen : MonoBehaviour
     private void UpdateCombat()
     {
         Alien enemy = EnemyInRange();
-        if (enemy == null)
+        if (enemy != null)
         {
-            return;
+            Vector3 direction = enemy.transform.position - transform.position;
+            direction.y = 0;
+            transform.rotation = Quaternion.LookRotation(direction);
         }
-        transform.rotation = Quaternion.LookRotation(enemy.transform.position - transform.position);
+
         if (!CanFireWeapon())
         {
             cooldown -= Time.deltaTime;
             return;
         }
+        print("CanFireWeapon");
+
+        if (enemy == null)
+        {
+            return;
+        }
+        print("EnemyInRange");
+
         FireWeapon(enemy);
     }
 
@@ -118,9 +128,12 @@ public class Citizen : MonoBehaviour
         {
             Vector3 oldPosition = transform.position;
             transform.position = Vector3.MoveTowards(transform.position, newLocation, CitizenRole.MovementSpeed * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(transform.position - oldPosition);
+            Vector3 direction = transform.position - oldPosition;
+            direction.y = 0;
+            transform.rotation = Quaternion.LookRotation(direction);
             yield return null;
         }
         isMoving = false;
+        transform.position = newLocation;
     }
 }

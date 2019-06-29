@@ -14,6 +14,7 @@ public class PlayerInput : MonoBehaviour
 {
     public object SelectedObject;
 
+    [HideInInspector]
     public SelectionType SelectedType;
 
     // Update is called once per frame

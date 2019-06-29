@@ -50,7 +50,7 @@ public class LevelManager : MonoBehaviour
     public List<CitizenType> AvailableCitizens = new List<CitizenType>();
 
     [HideInInspector]
-    public Commands Command = new Commands();
+    public Commands Command;
 
     public List<Alien> Aliens = new List<Alien>();
 
@@ -75,6 +75,7 @@ public class LevelManager : MonoBehaviour
         {
             s_instance = this;
             PlayerInput = GetComponent<PlayerInput>();
+            Command = GetComponent<Commands>();
             if (Waves.Count == 0)
             {
                 Debug.LogWarning("There are no waves set on this map!");
