@@ -32,6 +32,9 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public Commands Command = new Commands();
 
+    [HideInInspector]
+    public List<Alien> Aliens = new List<Alien>();
+
     // The simple getter method (usage: GB_Environment.Instance)
     public static LevelManager Instance
     {

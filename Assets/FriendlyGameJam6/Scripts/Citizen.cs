@@ -29,9 +29,10 @@ public class Citizen : MonoBehaviour
     {
         if (!CanFireWeapon())
         {
+            cooldown -= Time.deltaTime;
             return;
         }
-        if (!IsEnemyInRange())
+        if (EnemyInRange() == null)
         {
             return;
         }
@@ -50,19 +51,40 @@ public class Citizen : MonoBehaviour
             cooldown = CitizenRole.GetFireRate(EquipedWeapon);
             return true;
         }
-        cooldown -= Time.deltaTime;
         return false;
     }
 
-    private bool IsEnemyInRange()
+    private Transform EnemyInRange()
     {
-        throw new NotImplementedException();
+        for (int i = 0; i < LevelManager.Instance.Aliens.Count; i++)
+        {
+            Transform enemyTransform = LevelManager.Instance.Aliens[i].transform;
+            if (Mathf.Pow(enemyTransform.position.x - transform.position.x, 2) 
+                + Mathf.Pow(enemyTransform.position.z - transform.position.z, 2) 
+                    < Mathf.Pow(CitizenRole.GetRange(EquipedWeapon), 2))
+            {
+                return enemyTransform;
+            }
+        }
+        return null;
     }
 
     private IEnumerator MoveToLocation(Vector3 newLocation)
     {
         isMoving = true;
-        yield return null;
+
+        // Determine how long it takes to finish the transition
+        Vector3 tmpVector = newLocation - transform.position;
+        tmpVector.y = 0;
+        float magnitude2d = tmpVector.magnitude;
+        float duration = magnitude2d / CitizenRole.MovementSpeed;
+
+        float startTime = Time.time;
+        while (Time.time - startTime < duration)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, newLocation, CitizenRole.MovementSpeed * Time.deltaTime);
+            yield return null;
+        }
         isMoving = false;
     }
 
