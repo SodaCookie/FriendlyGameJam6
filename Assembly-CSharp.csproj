@@ -79,6 +79,7 @@
     <Compile Include="Assets\Easy Weapons\Scripts\Weapon.cs" />
     <Compile Include="Assets\Easy Weapons\Scripts\WeaponSystem.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Alien.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\CameraMouseFollow.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Citizen.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenWeapon.cs" />
@@ -153,6 +154,9 @@
     <Reference Include="Unity.RenderPipelines.HighDefinition.Runtime">
       <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.RenderPipelines.HighDefinition.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Editor">
+      <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.Rider.Editor">
       <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
@@ -161,6 +165,9 @@
     </Reference>
     <Reference Include="Unity.2D.Sprite.Editor">
       <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.2D.Sprite.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.2D.Tilemap.Editor">
       <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.2D.Tilemap.Editor.dll</HintPath>
@@ -182,12 +189,6 @@
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Editor">
-      <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.Postprocessing.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Postprocessing.Runtime">
-      <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.Postprocessing.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Hub/Editor/2019.3.0a7/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

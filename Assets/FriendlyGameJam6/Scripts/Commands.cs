@@ -73,6 +73,7 @@ public class Commands : MonoBehaviour
         {
             LevelManager.Instance.Aliens.Add(Instantiate(group.AlienType));
             yield return new WaitForSeconds(minorDelay);
+            print("SpawningGroupCoroutine");
         }
     }
 }
