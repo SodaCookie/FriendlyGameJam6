@@ -15,7 +15,11 @@ public class AlienGroup
 [CreateAssetMenu(fileName = "New Wave", menuName = "Waves/New Wave", order = 1)]
 public class Wave : ScriptableObject
 {
+    public float WaitForSeconds = float.PositiveInfinity;
+
     public List<AlienGroup> Groups;
+
+    public CitizenWeapon Reward;
 
     [Tooltip("Delay spawn time between each monster in a single group")]
     public float MinorDelay;

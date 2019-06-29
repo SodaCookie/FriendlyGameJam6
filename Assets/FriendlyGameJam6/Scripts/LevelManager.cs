@@ -30,7 +30,7 @@ public class LevelManager : MonoBehaviour
     // don't have to look it up every time.
     private static LevelManager s_instance = null;
 
-    public Transform Target;
+    public Transform EnemyDestination;
 
     public Transform CitizenSpawnPoint;
 
@@ -52,8 +52,11 @@ public class LevelManager : MonoBehaviour
     [HideInInspector]
     public Commands Command = new Commands();
 
-    [HideInInspector]
     public List<Alien> Aliens = new List<Alien>();
+
+    private int curWaveIndex = 0;
+    private bool playNextWave = false;
+    private bool waitingForNextWave = false;
 
     // The simple getter method (usage: GB_Environment.Instance)
     public static LevelManager Instance
@@ -72,6 +75,10 @@ public class LevelManager : MonoBehaviour
         {
             s_instance = this;
             PlayerInput = GetComponent<PlayerInput>();
+            if (Waves.Count == 0)
+            {
+                Debug.LogWarning("There are no waves set on this map!");
+            }
         }
         else
         {
@@ -92,6 +99,38 @@ public class LevelManager : MonoBehaviour
 
     private void UpdateEnemySpawns()
     {
+        if (playNextWave)
+        {
+            Command.BeginSpawning(Waves[curWaveIndex]);
+            curWaveIndex++;
+            playNextWave = false;
+        }
+
+        if (curWaveIndex < Waves.Count)
+        {
+            if (float.IsInfinity(Waves[curWaveIndex].WaitForSeconds))
+            {
+                if (Aliens.Count == 0)
+                {
+                    playNextWave = true;
+                }
+            }
+            else
+            {
+                if (!waitingForNextWave)
+                {
+                    StartCoroutine(WaitForNextWave(Waves[curWaveIndex].WaitForSeconds));
+                }
+            }
+        }
+    }
+
+    private IEnumerator WaitForNextWave(float duration)
+    {
+        waitingForNextWave = true;
+        yield return new WaitForSeconds(duration);
+        playNextWave = true;
+        waitingForNextWave = false;
     }
 
     // Ensure that the instance is destroyed when the game is stopped in 

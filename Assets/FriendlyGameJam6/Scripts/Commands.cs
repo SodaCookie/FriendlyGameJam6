@@ -69,7 +69,7 @@ public class Commands : MonoBehaviour
     {
         for (int i = 0; i < group.Amount; i++)
         {
-            Instantiate(group.AlienType, LevelManager.Instance.AlienSpawnPoint);
+            LevelManager.Instance.Aliens.Add(Instantiate(group.AlienType, LevelManager.Instance.AlienSpawnPoint));
             yield return new WaitForSeconds(minorDelay);
         }
     }

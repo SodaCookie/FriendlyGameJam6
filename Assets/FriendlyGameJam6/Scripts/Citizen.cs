@@ -11,23 +11,46 @@ public class Citizen : MonoBehaviour
 
     public Transform AttachmentPoint;
 
+    public GameObject RangeIndicator;
+
     private float cooldown = 0;
 
     private bool isMoving = true;
 
+    private void Start()
+    {
+        UpdateRangeIndicator();
+    }
+
     public void UpdateLocation(Vector3 newLocation)
     {
+        StopAllCoroutines();
         StartCoroutine(MoveToLocation(newLocation));
     }
 
     public void EquipWeapon(CitizenWeapon weapon)
     {
         LevelManager.Instance.Command.RemoveWeapon(weapon.Name);
+        UpdateRangeIndicator();
         EquipedWeapon = weapon;
+    }
+
+    private void UpdateRangeIndicator()
+    {
+        RangeIndicator.transform.localScale = new Vector3(1, 1, 1) * CitizenRole.GetRange(EquipedWeapon) * 2;
     }
 
     private void Update()
     {
+        if (LevelManager.Instance.PlayerInput.SelectedObject != null)
+        {
+            RangeIndicator.SetActive(LevelManager.Instance.PlayerInput.SelectedObject.Equals(gameObject));
+        }
+        else
+        {
+            RangeIndicator.SetActive(false);
+        }
+
         if (!isMoving)
         {
             UpdateCombat();
@@ -36,14 +59,15 @@ public class Citizen : MonoBehaviour
 
     private void UpdateCombat()
     {
-        if (!CanFireWeapon())
-        {
-            cooldown -= Time.deltaTime;
-            return;
-        }
         Alien enemy = EnemyInRange();
         if (enemy == null)
         {
+            return;
+        }
+        transform.rotation = Quaternion.LookRotation(enemy.transform.position - transform.position);
+        if (!CanFireWeapon())
+        {
+            cooldown -= Time.deltaTime;
             return;
         }
         FireWeapon(enemy);
@@ -92,10 +116,11 @@ public class Citizen : MonoBehaviour
         float startTime = Time.time;
         while (Time.time - startTime < duration)
         {
+            Vector3 oldPosition = transform.position;
             transform.position = Vector3.MoveTowards(transform.position, newLocation, CitizenRole.MovementSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(transform.position - oldPosition);
             yield return null;
         }
         isMoving = false;
     }
-
 }

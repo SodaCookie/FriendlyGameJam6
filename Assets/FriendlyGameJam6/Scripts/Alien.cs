@@ -17,13 +17,15 @@ public class Alien : MonoBehaviour
        
     void Start () {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.destination = LevelManager.Instance.Target.position;
+        agent.destination = LevelManager.Instance.EnemyDestination.position;
+        agent.speed = MoveSpeed;
     }
 
     void Update() {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
         Animator animator = GetComponent<Animator>();
-        animator.SetBool("Walk", agent.velocity.magnitude > 0.01);
+        animator.SetBool("Walk", agent.velocity.magnitude > 0.01 && agent.velocity.magnitude < 2);
+        animator.SetBool("SprintSlide", agent.velocity.magnitude > 2);
 
         if (Health <= 0)
         {
@@ -33,6 +35,10 @@ public class Alien : MonoBehaviour
 
     private void OnDestroy()
     {
-        LevelManager.Instance.Player.Money += Money;
+        if (Health <= 0)
+        {
+            LevelManager.Instance.Player.Money += Money;
+        }
+        LevelManager.Instance.Aliens.Remove(this);
     }
 }
