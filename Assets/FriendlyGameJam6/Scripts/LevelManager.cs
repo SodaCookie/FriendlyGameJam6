@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+[Serializable]
 public class PlayerStatus
 {
     public int Lives = 20;
@@ -21,13 +22,15 @@ public class LevelManager : MonoBehaviour
 
     public Transform Target;
 
-    public List<Wave> Waves;
+    public List<Wave> Waves = new List<Wave>();
 
-    public PlayerStatus Player;
+    [SerializeField]
+    public PlayerStatus Player = new PlayerStatus();
 
-    public CitizenType Citizens;
+    public List<CitizenType> Citizens = new List<CitizenType>();
 
-    public Commands Command;
+    [HideInInspector]
+    public Commands Command = new Commands();
 
     // The simple getter method (usage: GB_Environment.Instance)
     public static LevelManager Instance
@@ -53,15 +56,15 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    private void Update()
-    {
-        UpdateEnemySpawns();
-    }
+    //private void Update()
+    //{
+    //    UpdateEnemySpawns();
+    //}
 
-    private void UpdateEnemySpawns()
-    {
-        throw new NotImplementedException();
-    }
+    //private void UpdateEnemySpawns()
+    //{
+    //    throw new NotImplementedException();
+    //}
 
     // Ensure that the instance is destroyed when the game is stopped in 
     // the editor.

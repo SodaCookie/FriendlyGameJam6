@@ -83,6 +83,8 @@
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenWeapon.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Commands.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUILives.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIMoney.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\LevelManager.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Wave.cs" />
     <Compile Include="Assets\Low_Swordman\Demo\Scripts\CameraController.cs" />
@@ -92,11 +94,29 @@
     <Compile Include="Assets\Low_Swordman\Demo\Scripts\Swordman.cs" />
     <Compile Include="Assets\Scripts\SimpleCameraController.cs" />
     <Compile Include="Assets\TutorialInfo\Scripts\Readme.cs" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\3D Game Kit - Environment Pack\Shaders\Rock.shader" />
     <None Include="Assets\Easy Weapons\Readme.txt" />
     <None Include="Assets\3D Game Kit - Environment Pack\Shaders\Vegetation.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\3D Game Kit - Environment Pack\Shaders\GroundCover.shader" />
     <None Include="Assets\3D Game Kit - Environment Pack\Shaders\Terrain.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Properties.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMPro_Surface.cginc" />
+    <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile Masking.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF Overlay.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Bitmap-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_SDF-Mobile.shader" />
+    <None Include="Assets\TextMesh Pro\Resources\Shaders\TMP_Sprite.shader" />
     <Reference Include="Unity.Timeline.Editor">
       <HintPath>F:/Github/FriendlyGameJam6/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>

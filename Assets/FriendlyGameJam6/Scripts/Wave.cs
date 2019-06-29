@@ -11,17 +11,9 @@ public class AlienGroup
     public Alien AlienType;
 }
 
-public class Wave : MonoBehaviour
+
+[CreateAssetMenu(fileName = "New Wave", menuName = "Waves/New Wave", order = 1)]
+public class Wave : ScriptableObject
 {
     public List<AlienGroup> Groups;
-
-    public void BeginSpawning()
-    {
-        StartCoroutine(SpawningCoroutine());
-    }
-
-    private IEnumerator SpawningCoroutine()
-    {
-        throw new NotImplementedException();
-    }
 }

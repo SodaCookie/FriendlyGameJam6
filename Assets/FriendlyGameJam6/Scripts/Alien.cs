@@ -7,6 +7,8 @@ public class Alien : MonoBehaviour
 {
     public int Damage = 1;
 
+    public int Money;
+
     public int Health;
 
     public int Armor;
@@ -14,4 +16,9 @@ public class Alien : MonoBehaviour
     public float MoveSpeed;
 
     public float Target;
+
+    private void OnDestroy()
+    {
+        LevelManager.Instance.Player.Money += Money;
+    }
 }
