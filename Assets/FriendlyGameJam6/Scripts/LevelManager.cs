@@ -11,7 +11,17 @@ public class PlayerStatus
 
     public int Money = 0;
 
+    public int CitizenMax = 10;
+
     public List<CitizenWeapon> Weapons;
+
+    public List<GameObject> Citizens;
+}
+
+[Serializable]
+public class GameConstants
+{
+    public float CitizenSellRatio = 0.5f;
 }
 
 public class LevelManager : MonoBehaviour
@@ -22,15 +32,22 @@ public class LevelManager : MonoBehaviour
 
     public Transform Target;
 
+    public Transform CitizenSpawnPoint;
+
+    public Transform AlienSpawnPoint;
+
     public List<Wave> Waves = new List<Wave>();
 
     [SerializeField]
     public PlayerStatus Player = new PlayerStatus();
 
+    [SerializeField]
+    public GameConstants Constants = new GameConstants();
+
     [HideInInspector]
     public PlayerInput PlayerInput;
 
-    public List<CitizenType> Citizens = new List<CitizenType>();
+    public List<CitizenType> AvailableCitizens = new List<CitizenType>();
 
     [HideInInspector]
     public Commands Command = new Commands();

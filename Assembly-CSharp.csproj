@@ -83,9 +83,16 @@
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenWeapon.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Commands.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUICitizen.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUILives.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIMoney.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIPopulateCitizenBar.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIPopulation.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIWeapon.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIWeaponCount.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIWeaponSell.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\LevelManager.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\Location.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Wave.cs" />
     <Compile Include="Assets\Low_Swordman\Demo\Scripts\CameraController.cs" />

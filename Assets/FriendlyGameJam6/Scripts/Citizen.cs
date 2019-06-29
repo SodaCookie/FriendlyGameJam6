@@ -9,12 +9,21 @@ public class Citizen : MonoBehaviour
 
     public CitizenWeapon EquipedWeapon;
 
+    public Transform AttachmentPoint;
+
     private float cooldown = 0;
-    private bool isMoving = false;
+
+    private bool isMoving = true;
 
     public void UpdateLocation(Vector3 newLocation)
     {
         StartCoroutine(MoveToLocation(newLocation));
+    }
+
+    public void EquipWeapon(CitizenWeapon weapon)
+    {
+        LevelManager.Instance.Command.RemoveWeapon(weapon.Name);
+        EquipedWeapon = weapon;
     }
 
     private void Update()

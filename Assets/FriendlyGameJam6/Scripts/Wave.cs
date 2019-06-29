@@ -16,4 +16,10 @@ public class AlienGroup
 public class Wave : ScriptableObject
 {
     public List<AlienGroup> Groups;
+
+    [Tooltip("Delay spawn time between each monster in a single group")]
+    public float MinorDelay;
+
+    [Tooltip("Delay spawn time between each group")]
+    public float MajorDelay;
 }

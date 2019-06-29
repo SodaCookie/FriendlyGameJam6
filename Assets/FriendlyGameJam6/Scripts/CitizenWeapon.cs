@@ -8,8 +8,11 @@ public enum CitizenWeaponType
     Grenade = 1,
 };
 
-public class CitizenWeapon : MonoBehaviour
+[CreateAssetMenu(fileName = "Weapon", menuName = "Weapons/Weapon", order = 1)]
+public class CitizenWeapon : ScriptableObject
 {
+    public string Name;
+
     public int Damage;
 
     public int Cost;
@@ -19,4 +22,6 @@ public class CitizenWeapon : MonoBehaviour
     public float Range;
 
     public CitizenWeaponType Type;
+
+    public GameObject Visual;
 }
