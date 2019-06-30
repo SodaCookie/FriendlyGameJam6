@@ -34,7 +34,7 @@ public class LevelManager : MonoBehaviour
 
     public Transform CitizenSpawnPoint;
 
-    public Transform AlienSpawnPoint;
+    public List<Transform> AlienSpawnPoints;
 
     public List<Wave> Waves = new List<Wave>();
 

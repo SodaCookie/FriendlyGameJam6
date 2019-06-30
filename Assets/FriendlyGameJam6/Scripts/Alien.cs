@@ -17,7 +17,6 @@ public class Alien : MonoBehaviour
        
     void Start () {
         NavMeshAgent agent = GetComponent<NavMeshAgent>();
-        agent.Warp(LevelManager.Instance.AlienSpawnPoint.position);
         agent.destination = LevelManager.Instance.EnemyDestination.position;
         agent.speed = MoveSpeed;
     }

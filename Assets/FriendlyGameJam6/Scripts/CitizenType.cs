@@ -44,6 +44,7 @@ public class CitizenType : ScriptableObject
         {
             return DefaultRange;
         }
+        Debug.Log(weapon.Range + RangeModifier);
         return weapon.Range + RangeModifier;
     }
 
@@ -63,5 +64,10 @@ public class CitizenType : ScriptableObject
             return 1 / DefaultFirerate;
         }
         return 1 / (weapon.FireRate * FireRateModifier);
+    }
+
+    public virtual IEnumerator OnDamageDebuff(CitizenWeapon weapon, Alien alien)
+    {
+        return null;
     }
 }

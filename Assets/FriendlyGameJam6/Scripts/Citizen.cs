@@ -106,6 +106,11 @@ public class Citizen : MonoBehaviour
     private void FireWeapon(Alien enemy)
     {
         enemy.Health -= Mathf.Clamp(CitizenRole.GetDamage(EquipedWeapon) - enemy.Armor, 1, int.MaxValue);
+        IEnumerator damageCoroutine = CitizenRole.OnDamageDebuff(EquipedWeapon, enemy);
+        if (damageCoroutine != null)
+        {
+            enemy.StartCoroutine(damageCoroutine);
+        }
         cooldown = CitizenRole.GetFireRate(EquipedWeapon);
     }
 

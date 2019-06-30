@@ -9,6 +9,8 @@ public class AlienGroup
     public int Amount;
 
     public Alien AlienType;
+
+    public int SpawnPointIndex = 0;
 }
 
 

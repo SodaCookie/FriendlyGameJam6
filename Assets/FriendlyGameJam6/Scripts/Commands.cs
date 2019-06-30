@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Commands : MonoBehaviour
 {
@@ -70,9 +71,12 @@ public class Commands : MonoBehaviour
 
     private IEnumerator SpawningGroupCoroutine(AlienGroup group, float minorDelay)
     {
-        for (int i = 0; i < group.Amount; i++)
+        for (int i = 0; i < group.Amount; i++)  
         {
-            LevelManager.Instance.Aliens.Add(Instantiate(group.AlienType));
+            Alien newAlien = Instantiate(group.AlienType);
+            LevelManager.Instance.Aliens.Add(newAlien);
+            NavMeshAgent agent = newAlien.GetComponent<NavMeshAgent>();
+            agent.Warp(LevelManager.Instance.AlienSpawnPoints[group.SpawnPointIndex].position);
             yield return new WaitForSeconds(minorDelay);
         }
     }
