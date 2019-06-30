@@ -142,6 +142,11 @@ public class Citizen : MonoBehaviour
         if (EquipedWeapon != null)
         {
             GetComponent<AudioSource>().PlayOneShot(EquipedWeapon.Sound);
+            if (EquipedWeapon.Bullet != null)
+            {
+                GameObject bullet = Instantiate(EquipedWeapon.Bullet, AttachmentPoint.position, Quaternion.identity);
+                bullet.GetComponent<Bullet>().Fire(enemy.transform.position + Vector3.up * 2f + UnityEngine.Random.insideUnitSphere * 0.4f);
+            }
         }
         else
         {

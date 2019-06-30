@@ -68,6 +68,8 @@ public class LevelManager : MonoBehaviour
 
     public List<Alien> Aliens = new List<Alien>();
 
+    public string NextScene;
+
     private int curWaveIndex = 0;
     private bool playNextWave = false;
     private bool waitingForNextWave = false;
@@ -80,6 +82,8 @@ public class LevelManager : MonoBehaviour
             return s_instance;
         }
     }
+
+    public bool quitting = false;
 
     private void Awake()
     {
@@ -105,11 +109,34 @@ public class LevelManager : MonoBehaviour
     private void Update()
     {
         UpdateEnemySpawns();
-        if (Player.Lives <= 0)
+        if (Player.Lives <= 0 && !quitting)
         {
             StatusManager.DisplayStatus("You Lose");
-            Application.Quit();
+            StartCoroutine(QuitGame());
         }
+        if (Aliens.Count == 0 && curWaveIndex == Waves.Count && !quitting)
+        {
+            if (NextScene == null)
+            {
+                StatusManager.DisplayStatus("Game Complete");
+            }
+            StatusManager.DisplayStatus("Level Complete");
+            StartCoroutine(LoadNextScene());
+        }
+    }
+
+    private IEnumerator LoadNextScene()
+    {
+        quitting = true;
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(NextScene);
+    }
+
+    private IEnumerator QuitGame()
+    {
+        quitting = true;
+        yield return new WaitForSeconds(3);
+        Application.Quit();
     }
 
     private void UpdateEnemySpawns()
@@ -124,6 +151,7 @@ public class LevelManager : MonoBehaviour
                 }
             }
 
+            StatusManager.DisplayStatus(string.Format("Wave {0}", curWaveIndex + 1));
             Command.BeginSpawning(Waves[curWaveIndex]);
             curWaveIndex++;
             playNextWave = false;

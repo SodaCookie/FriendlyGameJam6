@@ -80,6 +80,7 @@
     <Compile Include="Assets\Easy Weapons\Scripts\WeaponSystem.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Alien.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\BillBoard.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\Bullet.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CameraMouseFollow.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Citizen.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\CitizenType.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Assets\FriendlyGameJam6\Scripts\ScientistType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\SumoType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Tutorial.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\Water.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Wave.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\ZoneOfProtection.cs" />
     <Compile Include="Assets\Low_Swordman\Demo\Scripts\CameraController.cs" />
