@@ -22,39 +22,63 @@ public class PlayerInput : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            // Here because I don't wanna make events
-            object previousSelectedObject = SelectedObject;
-            SelectionType previousSelectedType = SelectedType;
+            HandleSelection();
+        }
 
-            if (HandleSelectionInput<Citizen>(SelectionType.Citizen))
+        if (Input.GetMouseButtonDown(1))
+        {
+            HandleSelling();
+        }
+
+    }
+
+    private void HandleSelling()
+    {
+        if (HandleSelectionInput<Citizen>(SelectionType.Citizen))
+        {
+            // Equip the weapon
+            GameObject citizen = SelectedObject as GameObject;
+            LevelManager.Instance.Command.SellCitizen(citizen);
+        }
+    }
+
+    private void HandleSelection()
+    {
+        // Here because I don't wanna make events
+        object previousSelectedObject = SelectedObject;
+        SelectionType previousSelectedType = SelectedType;
+
+        if (HandleSelectionInput<Citizen>(SelectionType.Citizen))
+        {
+            if (previousSelectedObject != null)
             {
-                if (previousSelectedObject != null)
+                if (previousSelectedType == SelectionType.Weapon)
                 {
-                    if (previousSelectedType == SelectionType.Weapon)
+                    // Equip the weapon
+                    GameObject player = SelectedObject as GameObject;
+                    player.GetComponent<Citizen>().EquipWeapon(previousSelectedObject as CitizenWeapon);
+                }
+            }
+        }
+        else if (HandleSelectionInput<Location>(SelectionType.Location))
+        {
+            if (previousSelectedObject != null)
+            {
+                if (previousSelectedType == SelectionType.Citizen)
+                {
+                    // Equip the weapon
+                    GameObject player = previousSelectedObject as GameObject;
+                    GameObject location = SelectedObject as GameObject;
+                    if (!location.GetComponent<Location>().Occupied)
                     {
-                        // Equip the weapon
-                        GameObject player = SelectedObject as GameObject;
-                        player.GetComponent<Citizen>().EquipWeapon(previousSelectedObject as CitizenWeapon);
+                        player.GetComponent<Citizen>().UpdateLocation(location.GetComponent<Location>());
                     }
                 }
             }
-            else if (HandleSelectionInput<Location>(SelectionType.Location))
-            {
-                if (previousSelectedObject != null)
-                {
-                    if (previousSelectedType == SelectionType.Citizen)
-                    {
-                        // Equip the weapon
-                        GameObject player = previousSelectedObject as GameObject;
-                        GameObject location = SelectedObject as GameObject;
-                        player.GetComponent<Citizen>().UpdateLocation(location.transform.position);
-                    }
-                }
-            }
-            else
-            {
-                SelectedObject = null;
-            }
+        }
+        else
+        {
+            SelectedObject = null;
         }
     }
 

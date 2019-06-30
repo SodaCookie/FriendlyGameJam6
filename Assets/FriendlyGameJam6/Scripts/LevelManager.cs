@@ -102,6 +102,14 @@ public class LevelManager : MonoBehaviour
     {
         if (playNextWave)
         {
+            if (curWaveIndex > 0)
+            {
+                // Check for a reward and give it to the player
+                if (Waves[curWaveIndex - 1].Reward != null) {
+                    Command.AddWeapon(Waves[curWaveIndex - 1].Reward);
+                }
+            }
+
             Command.BeginSpawning(Waves[curWaveIndex]);
             curWaveIndex++;
             playNextWave = false;

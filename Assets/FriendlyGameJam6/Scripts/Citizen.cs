@@ -17,27 +17,49 @@ public class Citizen : MonoBehaviour
 
     private bool isMoving = true;
 
+    private GameObject visualObject;
+
+    private Location currentLocation;
+
     private void Start()
     {
         UpdateRangeIndicator();
     }
 
-    public void UpdateLocation(Vector3 newLocation)
+    public void UpdateLocation(Location newLocation)
     {
+
         StopAllCoroutines();
-        StartCoroutine(MoveToLocation(newLocation));
+        if (currentLocation != null)
+        {
+            currentLocation.Occupied = false;
+        }
+        currentLocation = newLocation;
+        newLocation.Occupied = true;
+        StartCoroutine(MoveToLocation(newLocation.transform.position));
     }
 
     public void EquipWeapon(CitizenWeapon weapon)
     {
         LevelManager.Instance.Command.RemoveWeapon(weapon.Name);
-        UpdateRangeIndicator();
         EquipedWeapon = weapon;
+
+        // Create the gun prefab
+        if (weapon != null)
+        {
+            if (visualObject != null)
+            {
+                Destroy(visualObject);
+            }
+            visualObject = Instantiate(weapon.Visual, AttachmentPoint);
+        }
+
+        UpdateRangeIndicator();
     }
 
     private void UpdateRangeIndicator()
     {
-        RangeIndicator.transform.localScale = new Vector3(1, 1, 1) * CitizenRole.GetRange(EquipedWeapon);
+        RangeIndicator.transform.localScale = new Vector3(1, 0.01f, 1) * CitizenRole.GetRange(EquipedWeapon);
     }
 
     private void Update()
@@ -72,20 +94,18 @@ public class Citizen : MonoBehaviour
             cooldown -= Time.deltaTime;
             return;
         }
-        print("CanFireWeapon");
 
         if (enemy == null)
         {
             return;
         }
-        print("EnemyInRange");
 
         FireWeapon(enemy);
     }
 
     private void FireWeapon(Alien enemy)
     {
-        enemy.Health -= CitizenRole.GetDamage(EquipedWeapon);
+        enemy.Health -= Mathf.Clamp(CitizenRole.GetDamage(EquipedWeapon) - enemy.Armor, 1, int.MaxValue);
         cooldown = CitizenRole.GetFireRate(EquipedWeapon);
     }
 

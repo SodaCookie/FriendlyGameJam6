@@ -6,7 +6,6 @@ public class ZoneOfProtection : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        print(other);
         if (other.attachedRigidbody != null)
         {
             Alien alien = other.attachedRigidbody.GetComponent<Alien>();

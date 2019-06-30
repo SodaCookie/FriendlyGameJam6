@@ -23,6 +23,7 @@ public class Commands : MonoBehaviour
         }
 
         LevelManager.Instance.Player.Citizens.Remove(citizen);
+        Destroy(citizen);
     }
 
     public void AddWeapon(CitizenWeapon weapon)
@@ -73,7 +74,6 @@ public class Commands : MonoBehaviour
         {
             LevelManager.Instance.Aliens.Add(Instantiate(group.AlienType));
             yield return new WaitForSeconds(minorDelay);
-            print("SpawningGroupCoroutine");
         }
     }
 }
