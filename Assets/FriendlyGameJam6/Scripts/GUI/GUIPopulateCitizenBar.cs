@@ -19,7 +19,7 @@ public class GUIPopulateCitizenBar : MonoBehaviour
 
             // Positioning
             RectTransform rTransform = child.GetComponent<RectTransform>();
-            rTransform.anchoredPosition = new Vector2(count * 80, 0);
+            rTransform.anchoredPosition = new Vector2(0, count * -60);
 
             count--;
         }
