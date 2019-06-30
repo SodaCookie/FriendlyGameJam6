@@ -145,7 +145,7 @@ public class Citizen : MonoBehaviour
         }
         else
         {
-
+            GetComponent<AudioSource>().PlayOneShot(LevelManager.Instance.Constants.PunchSound);
         }
         if (CitizenRole.GetWeaponType(EquipedWeapon) == CitizenWeaponType.Single)
         {
