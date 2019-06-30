@@ -14,6 +14,8 @@ public class PlayerInput : MonoBehaviour
 {
     public object SelectedObject;
 
+    public LayerMask UsedLayers;
+
     [HideInInspector]
     public SelectionType SelectedType;
 
@@ -91,7 +93,7 @@ public class PlayerInput : MonoBehaviour
     private bool HandleSelectionInput<ObjectType>(SelectionType type)
     {
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        if (Physics.Raycast(ray, out RaycastHit hitInfo))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 200, UsedLayers.value))
         {
             if (hitInfo.collider.attachedRigidbody != null)
             {

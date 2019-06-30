@@ -17,6 +17,10 @@ public class GUIWeapon : MonoBehaviour
         {
             LevelManager.Instance.PlayerInput.SetSelection(WeaponToUse, SelectionType.Weapon);
         }
+        else
+        {
+            StatusManager.DisplayError("You current have 0 " + WeaponToUse.Name + " available.");
+        }
     }
 
     public static int NumberOfWeaponType(string name)

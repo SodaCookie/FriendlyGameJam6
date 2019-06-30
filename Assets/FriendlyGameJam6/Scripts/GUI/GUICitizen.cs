@@ -25,5 +25,9 @@ public class GUICitizen : MonoBehaviour
         {
             LevelManager.Instance.Command.CreateCitizen(citizenPrefab);
         }
+        else
+        {
+            StatusManager.DisplayError("You do not have enough funds.");
+        }
     }
 }

@@ -17,5 +17,9 @@ public class GUIWeaponSell : MonoBehaviour
         {
             LevelManager.Instance.Command.SellWeapon(WeaponToUse.Name);
         }
+        else
+        {
+            StatusManager.DisplayError("You current have 0 " + WeaponToUse.Name + " available.");
+        }
     }
 }
