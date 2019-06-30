@@ -22,6 +22,12 @@ public class PlayerStatus
 public class GameConstants
 {
     public float CitizenSellRatio = 0.5f;
+
+    public float GrenadeRadius = 2f;
+
+    public bool RemoveOnEquip = true;
+
+    public AudioClip PunchSound;
 }
 
 public class LevelManager : MonoBehaviour

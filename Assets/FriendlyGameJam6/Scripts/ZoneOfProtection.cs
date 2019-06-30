@@ -12,7 +12,7 @@ public class ZoneOfProtection : MonoBehaviour
             if (alien)
             {
                 LevelManager.Instance.Player.Lives -= alien.Damage;
-                Destroy(alien);
+                Destroy(alien.gameObject);
             }
         }
     }

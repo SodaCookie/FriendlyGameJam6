@@ -13,6 +13,12 @@ public class Citizen : MonoBehaviour
 
     public GameObject RangeIndicator;
 
+    public List<AudioClip> OnSpawnAudio = new List<AudioClip>();
+
+    public List<AudioClip> OnMoveAudio = new List<AudioClip>();
+
+    public List<AudioClip> OnEquipAudio = new List<AudioClip>();
+
     private float cooldown = 0;
 
     private bool isMoving = true;
@@ -24,16 +30,27 @@ public class Citizen : MonoBehaviour
     private void Start()
     {
         UpdateRangeIndicator();
+
+        if (OnSpawnAudio.Count > 0)
+        {
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().PlayOneShot(OnSpawnAudio[UnityEngine.Random.Range(0, OnSpawnAudio.Count)]);
+        }
+    }
+
+    public void ClearLocation()
+    {
+        if (currentLocation != null)
+        {
+            currentLocation.Occupied = false;
+        }
     }
 
     public void UpdateLocation(Location newLocation)
     {
 
         StopAllCoroutines();
-        if (currentLocation != null)
-        {
-            currentLocation.Occupied = false;
-        }
+        ClearLocation();
         currentLocation = newLocation;
         newLocation.Occupied = true;
         StartCoroutine(MoveToLocation(newLocation.transform.position));
@@ -41,8 +58,25 @@ public class Citizen : MonoBehaviour
 
     public void EquipWeapon(CitizenWeapon weapon)
     {
-        LevelManager.Instance.Command.RemoveWeapon(weapon.Name);
+        if (LevelManager.Instance.Constants.RemoveOnEquip)
+        {
+            LevelManager.Instance.Command.RemoveWeapon(weapon.Name);
+        }
+        else
+        {
+            LevelManager.Instance.Command.RemoveWeapon(weapon.Name);
+            if (EquipedWeapon != null)
+            {
+                LevelManager.Instance.Command.AddWeapon(EquipedWeapon);
+            }
+        }
         EquipedWeapon = weapon;
+        if (OnEquipAudio.Count > 0)
+        {
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().PlayOneShot(OnEquipAudio[UnityEngine.Random.Range(0, OnEquipAudio.Count)]);
+        }
+
 
         // Create the gun prefab
         if (weapon != null)
@@ -59,7 +93,7 @@ public class Citizen : MonoBehaviour
 
     private void UpdateRangeIndicator()
     {
-        RangeIndicator.transform.localScale = new Vector3(1, 0.01f, 1) * CitizenRole.GetRange(EquipedWeapon);
+        RangeIndicator.transform.localScale = new Vector3(1, 0.001f, 1) * CitizenRole.GetRange(EquipedWeapon);
     }
 
     private void Update()
@@ -105,13 +139,44 @@ public class Citizen : MonoBehaviour
 
     private void FireWeapon(Alien enemy)
     {
+        if (EquipedWeapon != null)
+        {
+            GetComponent<AudioSource>().PlayOneShot(EquipedWeapon.Sound);
+        }
+        else
+        {
+
+        }
+        if (CitizenRole.GetWeaponType(EquipedWeapon) == CitizenWeaponType.Single)
+        {
+
+            DamageEnemy(enemy);
+        }
+        else if (CitizenRole.GetWeaponType(EquipedWeapon) == CitizenWeaponType.Grenade)
+        {
+            Vector2 impactPoint = new Vector2(enemy.transform.position.x, enemy.transform.position.z);
+            // Get all enemies in the area of damage
+            for (int i = 0; i < LevelManager.Instance.Aliens.Count; i++)
+            {
+                Vector2 enemyPosition = new Vector2(LevelManager.Instance.Aliens[i].transform.position.x, LevelManager.Instance.Aliens[i].transform.position.z);
+                if ((enemyPosition - impactPoint).sqrMagnitude < Mathf.Pow(LevelManager.Instance.Constants.GrenadeRadius, 2))
+                {
+                    DamageEnemy(LevelManager.Instance.Aliens[i]);
+                }
+            }
+        }
+
+        cooldown = CitizenRole.GetFireRate(EquipedWeapon);
+    }
+
+    private void DamageEnemy(Alien enemy)
+    {
         enemy.Health -= Mathf.Clamp(CitizenRole.GetDamage(EquipedWeapon) - enemy.Armor, 1, int.MaxValue);
         IEnumerator damageCoroutine = CitizenRole.OnDamageDebuff(EquipedWeapon, enemy);
         if (damageCoroutine != null)
         {
             enemy.StartCoroutine(damageCoroutine);
         }
-        cooldown = CitizenRole.GetFireRate(EquipedWeapon);
     }
 
     private bool CanFireWeapon()
@@ -141,6 +206,12 @@ public class Citizen : MonoBehaviour
     private IEnumerator MoveToLocation(Vector3 newLocation)
     {
         isMoving = true;
+
+        if (OnMoveAudio.Count > 0)
+        {
+            GetComponent<AudioSource>().Stop();
+            GetComponent<AudioSource>().PlayOneShot(OnMoveAudio[UnityEngine.Random.Range(0, OnMoveAudio.Count)]);
+        }
 
         // Determine how long it takes to finish the transition
         Vector3 tmpVector = newLocation - transform.position;

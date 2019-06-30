@@ -16,6 +16,7 @@ public class Commands : MonoBehaviour
     public void SellCitizen(GameObject citizen)
     {
         Citizen info = citizen.GetComponent<Citizen>();
+        info.ClearLocation();
         LevelManager.Instance.Player.Money += Mathf.FloorToInt(info.CitizenRole.Cost * LevelManager.Instance.Constants.CitizenSellRatio);
 
         if (info.EquipedWeapon != null)

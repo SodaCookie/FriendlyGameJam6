@@ -44,7 +44,6 @@ public class CitizenType : ScriptableObject
         {
             return DefaultRange;
         }
-        Debug.Log(weapon.Range + RangeModifier);
         return weapon.Range + RangeModifier;
     }
 

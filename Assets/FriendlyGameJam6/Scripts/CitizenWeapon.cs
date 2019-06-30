@@ -24,4 +24,6 @@ public class CitizenWeapon : ScriptableObject
     public CitizenWeaponType Type;
 
     public GameObject Visual;
+
+    public AudioClip Sound;
 }
