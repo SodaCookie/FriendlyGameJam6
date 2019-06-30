@@ -13,14 +13,16 @@ public class Tutorial : MonoBehaviour
     // Update is called once per frame
     IEnumerator DisplayMessages()
     {
-        StatusManager.DisplayError("This is a test error");
-        yield return new WaitForSeconds(3);
-        StatusManager.DisplayStatus("This is a test status update\n with a multiline");
-        yield return new WaitForSeconds(3);
-        StatusManager.DisplayStatus("Here's another message");
-        yield return new WaitForSeconds(1);
-        StatusManager.DisplayStatus("Woah dude sudden switch");
-        yield return new WaitForSeconds(1);
-        StatusManager.DisplayError("Woah dude error switch");
+        StatusManager.DisplayError("Tutorial");
+        yield return new WaitForSeconds(2.5f);
+        StatusManager.DisplayStatus("Welcome to Citizen Defense.");
+        yield return new WaitForSeconds(2.5f);
+        StatusManager.DisplayStatus("Buy citizens by purchasing them\nalong the citizen bar.");
+        yield return new WaitForSeconds(2.5f);
+        StatusManager.DisplayStatus("Move citizens to platforms to begin attacking\n aliens by selecting a citizen to move\nand left clicking an empty platform.");
+        yield return new WaitForSeconds(2.5f);
+        StatusManager.DisplayStatus("Right click citizens to sell them.\n You can also sell guns by\nhitting the red button next to the gun name.");
+        yield return new WaitForSeconds(2.5f);
+        StatusManager.DisplayError("Have fun and good luck!");
     }
 }

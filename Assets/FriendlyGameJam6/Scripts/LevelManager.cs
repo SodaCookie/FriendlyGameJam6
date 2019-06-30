@@ -150,6 +150,7 @@ public class LevelManager : MonoBehaviour
                 // Check for a reward and give it to the player
                 if (Waves[curWaveIndex - 1].Reward != null) {
                     Command.AddWeapon(Waves[curWaveIndex - 1].Reward);
+                    StartCoroutine(DelayMessageForGun(Waves[curWaveIndex - 1].Reward));
                 }
             }
 
@@ -176,6 +177,12 @@ public class LevelManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    private IEnumerator DelayMessageForGun(CitizenWeapon weapon)
+    {
+        yield return new WaitForSeconds(2.5f);
+        StatusManager.DisplayError(string.Format("Recieved {0}", weapon.Name));
     }
 
     private IEnumerator WaitForNextWave(float duration)
