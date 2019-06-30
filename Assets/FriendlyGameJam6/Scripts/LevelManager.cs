@@ -111,7 +111,7 @@ public class LevelManager : MonoBehaviour
         UpdateEnemySpawns();
         if (Player.Lives <= 0 && !quitting)
         {
-            StatusManager.DisplayStatus("You Lose");
+            StatusManager.DisplayStatus("Game Over");
             StartCoroutine(QuitGame());
         }
         if (Aliens.Count == 0 && curWaveIndex == Waves.Count && !quitting)
@@ -136,7 +136,9 @@ public class LevelManager : MonoBehaviour
     {
         quitting = true;
         yield return new WaitForSeconds(3);
-        Application.Quit();
+        StatusManager.DisplayStatus("Restarting Now...");
+        yield return new WaitForSeconds(2);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     private void UpdateEnemySpawns()
