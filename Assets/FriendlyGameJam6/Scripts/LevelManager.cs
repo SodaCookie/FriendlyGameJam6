@@ -28,6 +28,14 @@ public class GameConstants
     public bool RemoveOnEquip = true;
 
     public AudioClip PunchSound;
+
+    public float DisplayMessageDefaultDuration = 2;
+
+    public float DisplayErrorDefaultDuration = 1;
+
+    public float DisplayMessageDefaultExit = 0.25f;
+
+    public float DisplayMessageDefaultEnter = 0.25f;
 }
 
 public class LevelManager : MonoBehaviour
@@ -99,7 +107,7 @@ public class LevelManager : MonoBehaviour
         UpdateEnemySpawns();
         if (Player.Lives <= 0)
         {
-            print("You Lose");
+            StatusManager.DisplayStatus("You Lose");
             Application.Quit();
         }
     }

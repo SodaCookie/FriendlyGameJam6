@@ -93,12 +93,14 @@
     <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIWeapon.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIWeaponCount.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\GUIWeaponSell.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\GUI\StatusManager.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\LevelManager.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Location.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\NunType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\PlayerInput.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\ScientistType.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\SumoType.cs" />
+    <Compile Include="Assets\FriendlyGameJam6\Scripts\Tutorial.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\Wave.cs" />
     <Compile Include="Assets\FriendlyGameJam6\Scripts\ZoneOfProtection.cs" />
     <Compile Include="Assets\Low_Swordman\Demo\Scripts\CameraController.cs" />
